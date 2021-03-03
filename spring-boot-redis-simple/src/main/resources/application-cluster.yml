@@ -1,0 +1,12 @@
+spring:
+  redis:
+    password: yzfar.com
+    cluster:
+      max-redirects: 3
+      nodes: 192.168.0.59:32001,192.168.0.59:32002,192.168.0.59:32003,192.168.0.59:32004,192.168.0.59:32005,192.168.0.59:32006
+    lettuce:
+      pool:
+        max-active: 1000
+        max-idle: 10
+        min-idle: 5
+        max-wait: 3000
