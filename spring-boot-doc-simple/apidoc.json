@@ -1,0 +1,8 @@
+{
+  "name": "文档生成",
+  "version": "1.0.0",
+  "description": "这是一个简单的apidoc的demo",
+  "title": "文档生成",
+  "url" : "http://127.0.0.1:666/api",
+  "sampleUrl":"http://127.0.0.1:666/api"
+}
