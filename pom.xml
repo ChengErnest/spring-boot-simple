@@ -7,7 +7,8 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<modules>
 		<module>spring-boot-redis-simple</module>
-	</modules>
+		<module>spring-boot-doc-simple</module>
+    </modules>
 	<packaging>pom</packaging>
 	<name>spring-simple</name>
 	<description>Spring相关组件示例</description>
