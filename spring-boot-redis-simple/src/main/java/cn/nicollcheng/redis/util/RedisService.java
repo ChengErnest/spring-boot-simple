@@ -2,6 +2,7 @@ package cn.nicollcheng.redis.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ScanOptions;
@@ -9,6 +10,7 @@ import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -86,6 +88,26 @@ public class RedisService {
                 redisTemplate.delete(CollectionUtils.arrayToList(key));
             }
         }
+    }
+
+    /**
+     * 无阻塞的提取出指定模式的 key 列表
+     * @param matchKey 待匹配key
+     * @param size 匹配数量
+     * @return 所有匹配的key
+     */
+    public Set<String> scan(String matchKey, long size) {
+        Set<String> keys = new HashSet();
+        RedisConnection connection =redisTemplate.getConnectionFactory().getConnection();
+        ScanOptions scanOptions = ScanOptions.scanOptions()
+                .match("*" + matchKey + "*")
+                .count(size)
+                .build();
+        Cursor<byte[]> cursor = connection.scan(scanOptions);
+        while (cursor.hasNext()) {
+            keys.add(new String(cursor.next()));
+        }
+        return keys;
     }
 
     // ============================String=============================
