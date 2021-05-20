@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Set;
+
 /**
  * @author nicollcheng
  * @Description
@@ -16,15 +18,19 @@ public class RedisServiceTest {
     private RedisService redisService;
     @Test
     public void test(){
-        redisService.set("testKey", "value", 10);
-        redisService.set("key1", "value");
-        redisService.del("key1");
-        redisService.set("num",2);
-        redisService.decr("num", 1);
-        redisService.incr("num", 2);
-        redisService.expire("num", 10);
-        redisService.hset("hkey","item","value");
-        redisService.hget("hkey","item");
+//        redisService.set("testKey", "value", 10);
+//        redisService.set("key1", "value");
+//        redisService.del("key1");
+//        redisService.set("num",2);
+//        redisService.decr("num", 1);
+//        redisService.incr("num", 2);
+//        redisService.expire("num", 10);
+//        redisService.hset("hkey","item","value");
+//        redisService.hget("hkey","item");
+        long start = System.currentTimeMillis();
+        Set<String> job = redisService.scan("", 100000);
+        long useTime = System.currentTimeMillis() - start;
+        System.out.println("用时"+useTime+","+job.size());
     }
 
 }
